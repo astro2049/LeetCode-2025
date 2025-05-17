@@ -14,7 +14,7 @@ public:
         int profit = 0;
         for (int i = 0, j = 0; j < prices.size(); j++) {
             if (j == prices.size() - 1 || prices[j] > prices[j + 1]) {
-                profit += max(0, prices[j] - prices[i]);
+                profit += prices[j] - prices[i];
                 i = j + 1;
             }
         }
