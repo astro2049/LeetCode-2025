@@ -23,7 +23,7 @@ public:
         ListNode *dummy = new ListNode(), *n = dummy;
 
         bool carry = false;
-        while (l1 || l2 || carry) {
+        while (l1 || l2) {
             int val1 = l1 ? l1->val : 0;
             int val2 = l2 ? l2->val : 0;
             n->next = new ListNode(val1 + val2 + (carry ? 1 : 0));
@@ -40,6 +40,9 @@ public:
                 l2 = l2->next;
             }
             n = n->next;
+        }
+        if (carry) {
+            n->next = new ListNode(1);
         }
 
         return dummy->next;
