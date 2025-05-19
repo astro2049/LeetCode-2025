@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,12 +12,13 @@ int main() {
 class Solution {
 public:
     vector<vector<int>> combos;
-    int target;
     vector<int> candidates;
+    int target;
 
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
-        this->target = target;
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
         this->candidates = candidates;
+        sort(this->candidates.begin(), this->candidates.end());
+        this->target = target;
         vector<int> combo;
         choose(0, 0, combo);
         return combos;
@@ -31,9 +33,13 @@ public:
         }
         sum += candidates[i];
         combo.push_back(candidates[i]);
-        choose(i, sum, combo);
+        choose(i + 1, sum, combo);
         sum -= candidates[i];
         combo.pop_back();
-        choose(i + 1, sum, combo);
+        i++;
+        while (i < candidates.size() && candidates[i - 1] == candidates[i]) {
+            i++;
+        }
+        choose(i, sum, combo);
     }
 };
